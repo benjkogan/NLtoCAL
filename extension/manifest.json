@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "NLtoCAL",
+  "version": "1.0.0",
+  "description": "Natural language to Google Calendar — create, delete, and RSVP to events by typing naturally.",
+  "permissions": ["storage", "tabs"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "NLtoCAL"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
