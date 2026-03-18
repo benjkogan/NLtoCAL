@@ -6,12 +6,12 @@ export default function About() {
       <header className="flex w-full max-w-2xl items-center justify-between py-8">
         <a
           href="/"
-          className="text-lg font-medium tracking-wide transition-colors"
+          className="text-xl font-medium tracking-wide transition-colors"
           style={{ color: "var(--text-primary)" }}
           onMouseOver={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
           onMouseOut={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
         >
-          NLtoCAL
+          NLtoCal
         </a>
       </header>
 

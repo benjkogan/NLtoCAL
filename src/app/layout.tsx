@@ -6,19 +6,19 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NLtoCAL",
+  title: "NLtoCal",
   description: "Natural language to Google Calendar",
   icons: {
     icon: "/favicon.png",
   },
   openGraph: {
-    title: "NLtoCAL",
+    title: "NLtoCal",
     description: "Natural language to Google Calendar",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NLtoCAL",
+    title: "NLtoCal",
     description: "Natural language to Google Calendar",
     images: ["/og-image.png"],
   },

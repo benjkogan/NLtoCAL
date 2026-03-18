@@ -40,11 +40,11 @@ export default function AuthButton() {
       onClick={() => signIn("google")}
       className="flex items-center gap-2 rounded px-4 py-2 text-sm font-medium transition-colors"
       style={{
-        background: "var(--accent)",
-        color: "var(--bg)",
+        color: "var(--text-primary)",
+        border: "1px solid var(--border)",
       }}
-      onMouseOver={(e) => (e.currentTarget.style.background = "var(--accent-hover)")}
-      onMouseOut={(e) => (e.currentTarget.style.background = "var(--accent)")}
+      onMouseOver={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
+      onMouseOut={(e) => (e.currentTarget.style.background = "transparent")}
     >
       <svg width="16" height="16" viewBox="0 0 48 48">
         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
