@@ -162,13 +162,13 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center bg-pattern px-6">
       <header className="flex w-full max-w-2xl items-center justify-between py-8">
-        <h1 className="text-xl font-medium tracking-wide" style={{ color: "var(--text-primary)" }}>
+        <h1 className="text-2xl font-semibold tracking-wide" style={{ color: "var(--text-primary)" }}>
           NLtoCal
         </h1>
         <div className="flex items-center gap-4">
           <a
             href="/about"
-            className="text-sm transition-colors"
+            className="text-sm underline transition-colors"
             style={{ color: "var(--text-tertiary)" }}
             onMouseOver={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
             onMouseOut={(e) => (e.currentTarget.style.color = "var(--text-tertiary)")}
@@ -247,41 +247,6 @@ export default function Home() {
           </div>
         )}
 
-        <div
-          className="w-full max-w-2xl mt-16 mb-12 rounded-lg p-6 text-center"
-          style={{
-            background: "var(--bg-raised)",
-            border: "1px solid var(--border)",
-          }}
-        >
-          <h3
-            className="text-lg font-medium mb-2"
-            style={{ color: "var(--text-primary)" }}
-          >
-            Chrome Extension
-          </h3>
-          <p className="text-sm mb-4" style={{ color: "var(--text-secondary)" }}>
-            Add events from anywhere with our Chrome extension — no need to open the full app.
-          </p>
-          <a
-            href="https://github.com/benjkogan/NLtoCAL/tree/main/extension"
-            target="_blank"
-            className="inline-flex items-center gap-2 rounded px-4 py-2 text-sm font-medium transition-colors"
-            style={{
-              background: "var(--accent)",
-              color: "var(--bg)",
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.background = "var(--accent-hover)")}
-            onMouseOut={(e) => (e.currentTarget.style.background = "var(--accent)")}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            Get the Extension
-          </a>
-        </div>
       </div>
     </main>
   );
