@@ -21,6 +21,28 @@ function fromLocalDatetime(local: string) {
   return new Date(local).toISOString();
 }
 
+function formatRecurrence(rrule: string): string {
+  const rule = rrule.replace("RRULE:", "");
+  const parts = Object.fromEntries(rule.split(";").map((p) => p.split("=")));
+  const dayMap: Record<string, string> = {
+    MO: "Mon", TU: "Tue", WE: "Wed", TH: "Thu", FR: "Fri", SA: "Sat", SU: "Sun",
+  };
+  const freq = parts.FREQ?.toLowerCase();
+  if (!freq) return rrule;
+  let label = freq === "daily" ? "Daily" : freq === "weekly" ? "Weekly" : freq === "monthly" ? "Monthly" : freq === "yearly" ? "Yearly" : freq;
+  if (parts.BYDAY) {
+    const days = parts.BYDAY.split(",").map((d: string) => dayMap[d] || d).join(", ");
+    label += ` on ${days}`;
+  }
+  if (parts.COUNT) label += ` (${parts.COUNT} times)`;
+  if (parts.UNTIL) {
+    const until = parts.UNTIL;
+    const date = `${until.slice(0, 4)}-${until.slice(4, 6)}-${until.slice(6, 8)}`;
+    label += ` until ${new Date(date).toLocaleDateString()}`;
+  }
+  return label;
+}
+
 function formatDateTime(iso: string) {
   return new Date(iso).toLocaleString(undefined, {
     weekday: "short",
@@ -148,6 +170,24 @@ export default function ConfirmationCard({
                   style={inputStyle}
                 />
               </div>
+              <div>
+                <label className="mb-1.5 block text-xs" style={{ color: "var(--text-tertiary)" }}>
+                  Recurrence
+                </label>
+                <select
+                  value={edited.recurrence || ""}
+                  onChange={(e) => handleFieldChange("recurrence", e.target.value)}
+                  className="w-full rounded px-3 py-2 text-sm focus:outline-none"
+                  style={inputStyle}
+                >
+                  <option value="">None (one-time)</option>
+                  <option value="RRULE:FREQ=DAILY">Daily</option>
+                  <option value="RRULE:FREQ=WEEKLY">Weekly</option>
+                  <option value="RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR">Every weekday</option>
+                  <option value="RRULE:FREQ=MONTHLY">Monthly</option>
+                  <option value="RRULE:FREQ=YEARLY">Yearly</option>
+                </select>
+              </div>
             </div>
           ) : (
             <div>
@@ -169,6 +209,11 @@ export default function ConfirmationCard({
               {(action as CreateAction).description && (
                 <p className="mt-1 text-sm" style={{ color: "var(--text-tertiary)" }}>
                   {(action as CreateAction).description}
+                </p>
+              )}
+              {(action as CreateAction).recurrence && (
+                <p className="mt-1 text-sm" style={{ color: "var(--blue)" }}>
+                  Repeats: {formatRecurrence((action as CreateAction).recurrence!)}
                 </p>
               )}
             </div>

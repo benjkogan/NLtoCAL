@@ -88,6 +88,7 @@ export default function Home() {
           endTime: action.endTime,
           description: action.description,
           location: action.location,
+          recurrence: action.recurrence,
         }),
       });
       const data = await res.json();
@@ -167,8 +168,17 @@ export default function Home() {
         </h1>
         <div className="flex items-center gap-4">
           <a
+            href="/"
+            className="text-base underline transition-colors"
+            style={{ color: "var(--text-tertiary)" }}
+            onMouseOver={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+            onMouseOut={(e) => (e.currentTarget.style.color = "var(--text-tertiary)")}
+          >
+            Home
+          </a>
+          <a
             href="/about"
-            className="text-sm underline transition-colors"
+            className="text-base underline transition-colors"
             style={{ color: "var(--text-tertiary)" }}
             onMouseOver={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
             onMouseOut={(e) => (e.currentTarget.style.color = "var(--text-tertiary)")}

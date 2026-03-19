@@ -14,6 +14,7 @@ export async function createEvent(
     endTime: string;
     description?: string;
     location?: string;
+    recurrence?: string;
   }
 ) {
   const calendar = getCalendarClient(accessToken);
@@ -25,6 +26,7 @@ export async function createEvent(
       location: eventData.location,
       start: { dateTime: eventData.startTime },
       end: { dateTime: eventData.endTime },
+      ...(eventData.recurrence ? { recurrence: [eventData.recurrence] } : {}),
     },
   });
   return response.data;

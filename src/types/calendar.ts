@@ -7,6 +7,7 @@ export interface CreateAction {
   endTime: string; // ISO 8601
   description?: string;
   location?: string;
+  recurrence?: string; // RRULE string, e.g. "RRULE:FREQ=WEEKLY;BYDAY=MO"
 }
 
 export interface DeleteAction {

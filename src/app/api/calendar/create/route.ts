@@ -11,7 +11,14 @@ export async function POST(request: NextRequest) {
 
   const body = await request.json();
   try {
-    const event = await createEvent(session.accessToken, body);
+    const event = await createEvent(session.accessToken, {
+      title: body.title,
+      startTime: body.startTime,
+      endTime: body.endTime,
+      description: body.description,
+      location: body.location,
+      recurrence: body.recurrence,
+    });
     return NextResponse.json({ success: true, event });
   } catch (error: unknown) {
     console.error("Create event error:", error);

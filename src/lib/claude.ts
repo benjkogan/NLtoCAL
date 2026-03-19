@@ -6,7 +6,7 @@ const client = new Anthropic();
 const SYSTEM_PROMPT = `You are a calendar assistant that parses natural language into structured calendar actions. Today's date and time is provided below. Always return valid JSON matching one of these schemas:
 
 For creating events:
-{ "action": "create", "title": string, "startTime": ISO8601, "endTime": ISO8601, "description"?: string, "location"?: string }
+{ "action": "create", "title": string, "startTime": ISO8601, "endTime": ISO8601, "description"?: string, "location"?: string, "recurrence"?: string }
 
 For deleting events:
 { "action": "delete", "query": string (search terms to find the event), "startDate"?: ISO8601, "endDate"?: ISO8601 }
@@ -20,6 +20,7 @@ Rules:
 - "noon" means 12:00 PM, "midnight" means 12:00 AM. Pay careful attention to the specific times mentioned.
 - All returned times must include the correct timezone offset.
 - For delete and rsvp, include startDate/endDate to help narrow the search window.
+- If the user specifies a recurring event (e.g. "every Monday", "weekly", "daily", "every weekday"), include a "recurrence" field with a valid RRULE string. Examples: "RRULE:FREQ=WEEKLY;BYDAY=MO", "RRULE:FREQ=DAILY", "RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR", "RRULE:FREQ=MONTHLY;BYDAY=1FR". If the user specifies an end date for the recurrence, add UNTIL (e.g. "RRULE:FREQ=WEEKLY;BYDAY=MO;UNTIL=20260401T000000Z"). If a count is specified, use COUNT (e.g. "RRULE:FREQ=WEEKLY;COUNT=10"). Do not include "recurrence" for one-time events.
 - Return ONLY the JSON object, no other text.`;
 
 export async function parseNaturalLanguage(

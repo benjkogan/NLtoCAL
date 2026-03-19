@@ -13,6 +13,26 @@ export default function About() {
         >
           NLtoCal
         </a>
+        <div className="flex items-center gap-4">
+          <a
+            href="/"
+            className="text-base underline transition-colors"
+            style={{ color: "var(--text-tertiary)" }}
+            onMouseOver={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+            onMouseOut={(e) => (e.currentTarget.style.color = "var(--text-tertiary)")}
+          >
+            Home
+          </a>
+          <a
+            href="/about"
+            className="text-base underline transition-colors"
+            style={{ color: "var(--text-tertiary)" }}
+            onMouseOver={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+            onMouseOut={(e) => (e.currentTarget.style.color = "var(--text-tertiary)")}
+          >
+            About
+          </a>
+        </div>
       </header>
 
       <div className="w-full max-w-2xl pt-16 pb-24">
