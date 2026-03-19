@@ -19,10 +19,10 @@ Rules:
 - Use the provided current date/time and timezone to resolve relative dates like "tomorrow", "next Friday", etc.
 - "noon" means 12:00 PM, "midnight" means 12:00 AM. Pay careful attention to the specific times mentioned.
 - Parse compact time formats carefully: "1030am" = 10:30 AM, "230pm" = 2:30 PM, "9am" = 9:00 AM. Always respect AM/PM exactly as written.
+- CRITICAL timezone rule: Times the user mentions are ALWAYS in their local timezone. If the user says "noon" and their timezone is America/New_York (UTC-4), output "2026-03-24T12:00:00-04:00" — the time portion (12:00) must match what the user said. Do NOT convert to UTC. The offset in the ISO string indicates the timezone, not an amount to add.
 - When the user says "thru" or "through" a date for a recurring event, that date is inclusive — use UNTIL with that exact date.
 - When duration is specified (e.g. "for 1.5 hours", "for 90 minutes"), calculate endTime by adding the duration to startTime.
 - For recurring events on specific days (e.g. "Tue Thur"), the first occurrence should start on the next matching day, not today.
-- All returned times must include the correct timezone offset.
 - For delete and rsvp, include startDate/endDate to help narrow the search window.
 - If the user specifies a recurring event (e.g. "every Monday", "weekly", "daily", "every weekday"), include a "recurrence" field with a valid RRULE string. Examples: "RRULE:FREQ=WEEKLY;BYDAY=MO", "RRULE:FREQ=DAILY", "RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR", "RRULE:FREQ=MONTHLY;BYDAY=1FR". If the user specifies an end date for the recurrence, add UNTIL (e.g. "RRULE:FREQ=WEEKLY;BYDAY=MO;UNTIL=20260401T000000Z"). If a count is specified, use COUNT (e.g. "RRULE:FREQ=WEEKLY;COUNT=10"). Do not include "recurrence" for one-time events.
 - Return ONLY the JSON object, no other text.`;
