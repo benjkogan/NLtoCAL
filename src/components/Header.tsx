@@ -34,6 +34,15 @@ export default function Header() {
         >
           About
         </Link>
+        <Link
+          href="/privacy"
+          className="text-base underline transition-colors"
+          style={{ color: "var(--text-tertiary)" }}
+          onMouseOver={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+          onMouseOut={(e) => (e.currentTarget.style.color = "var(--text-tertiary)")}
+        >
+          Privacy
+        </Link>
         <AuthButton />
       </div>
     </header>
