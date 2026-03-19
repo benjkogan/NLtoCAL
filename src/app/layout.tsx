@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.png",
   },
+  verification: {
+    google: "B0c__q2prIk4MFVYxusv8YFfG181KloTBtXp0MSZEYU",
+  },
   openGraph: {
     title: "NLtoCal",
     description: "Natural language to Google Calendar",
