@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import SessionProvider from "@/components/SessionProvider";
+import Header from "@/components/Header";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -32,7 +33,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased ${inter.className}`}>
-        <SessionProvider>{children}</SessionProvider>
+        <SessionProvider>
+          <div className="flex min-h-screen flex-col items-center bg-pattern px-6">
+            <Header />
+            {children}
+          </div>
+        </SessionProvider>
       </body>
     </html>
   );
