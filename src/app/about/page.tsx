@@ -26,7 +26,7 @@ export default function About() {
         <div className="space-y-8">
           <section>
             <h2
-              className="text-xs font-medium uppercase tracking-widest mb-3"
+              className="text-sm font-medium uppercase tracking-widest mb-3"
               style={{ color: "var(--text-secondary)" }}
             >
               What it is
@@ -41,7 +41,7 @@ export default function About() {
 
           <section>
             <h2
-              className="text-xs font-medium uppercase tracking-widest mb-3"
+              className="text-sm font-medium uppercase tracking-widest mb-3"
               style={{ color: "var(--text-secondary)" }}
             >
               How it works
@@ -84,7 +84,7 @@ export default function About() {
 
           <section>
             <h2
-              className="text-xs font-medium uppercase tracking-widest mb-3"
+              className="text-sm font-medium uppercase tracking-widest mb-3"
               style={{ color: "var(--text-secondary)" }}
             >
               Examples
@@ -114,7 +114,7 @@ export default function About() {
 
           <section>
             <h2
-              className="text-xs font-medium uppercase tracking-widest mb-3"
+              className="text-sm font-medium uppercase tracking-widest mb-3"
               style={{ color: "var(--text-secondary)" }}
             >
               Why it exists
@@ -130,7 +130,7 @@ export default function About() {
 
           <section>
             <h2
-              className="text-xs font-medium uppercase tracking-widest mb-3"
+              className="text-sm font-medium uppercase tracking-widest mb-3"
               style={{ color: "var(--text-secondary)" }}
             >
               Privacy
