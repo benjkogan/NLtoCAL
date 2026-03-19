@@ -32,13 +32,22 @@ export default function Home() {
   }
 
   async function handleParse(text: string) {
+    if (!session) {
+      signIn("google");
+      return;
+    }
     setError(null);
     setIsParsing(true);
     try {
       const res = await fetch("/api/parse", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({
+          text,
+          timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+          localTime: new Date().toLocaleString("en-US", { dateStyle: "full", timeStyle: "long" }),
+          isoTime: new Date().toISOString(),
+        }),
       });
       if (!res.ok) {
         const data = await res.json();
@@ -161,73 +170,56 @@ export default function Home() {
 
   return (
     <div className="flex flex-1 flex-col items-center gap-8 pt-32 w-full max-w-2xl">
-      {session ? (
-        <>
-          <div className="text-center mb-4">
-            <h2
-              className="text-3xl font-medium tracking-tight mb-2"
-              style={{ color: "var(--text-primary)" }}
-            >
-              What&apos;s on your calendar?
-            </h2>
-            <p style={{ color: "var(--text-secondary)" }}>
-              Create, delete, or RSVP to events — just type naturally. We&apos;ll handle the rest.
-            </p>
-          </div>
+      <div className="text-center mb-4">
+        <h2
+          className="text-3xl font-medium tracking-tight mb-2"
+          style={{ color: "var(--text-primary)" }}
+        >
+          What&apos;s on your calendar?
+        </h2>
+        <p style={{ color: "var(--text-secondary)" }}>
+          Create, delete, or RSVP to events — just type naturally. We&apos;ll handle the rest.
+        </p>
+      </div>
 
-          <NLInput onSubmit={handleParse} isLoading={isParsing} />
+      <NLInput onSubmit={handleParse} isLoading={isParsing} />
 
-          {error && (
-            <div
-              className="w-full rounded-lg px-4 py-3 text-sm"
-              style={{
-                background: "rgba(248, 113, 113, 0.08)",
-                border: "1px solid rgba(248, 113, 113, 0.15)",
-                color: "var(--red)",
-              }}
-            >
-              {error}
-            </div>
-          )}
-
-          {ui.step === "confirming" && (
-            <ConfirmationCard
-              action={ui.action}
-              onConfirm={handleConfirmCreate}
-              onCancel={reset}
-              isLoading={false}
-            />
-          )}
-
-          {ui.step === "picking" && (
-            <EventPicker
-              events={ui.events}
-              actionLabel={ui.action.action === "delete" ? "delete" : ui.action.action === "rsvp" ? `RSVP ${ui.action.status}` : ""}
-              onSelect={handlePickEvent}
-              onCancel={reset}
-            />
-          )}
-
-          {ui.step === "executing" && (
-            <p style={{ color: "var(--text-tertiary)" }}>Executing...</p>
-          )}
-
-          <RecentActions actions={actions} />
-        </>
-      ) : (
-        <div className="text-center pt-8">
-          <h2
-            className="text-3xl font-medium tracking-tight mb-3"
-            style={{ color: "var(--text-primary)" }}
-          >
-            Natural language to calendar
-          </h2>
-          <p style={{ color: "var(--text-secondary)" }}>
-            Sign in with Google to manage your calendar with plain English.
-          </p>
+      {error && (
+        <div
+          className="w-full rounded-lg px-4 py-3 text-sm"
+          style={{
+            background: "rgba(248, 113, 113, 0.08)",
+            border: "1px solid rgba(248, 113, 113, 0.15)",
+            color: "var(--red)",
+          }}
+        >
+          {error}
         </div>
       )}
 
+      {ui.step === "confirming" && (
+        <ConfirmationCard
+          action={ui.action}
+          onConfirm={handleConfirmCreate}
+          onCancel={reset}
+          isLoading={false}
+        />
+      )}
+
+      {ui.step === "picking" && (
+        <EventPicker
+          events={ui.events}
+          actionLabel={ui.action.action === "delete" ? "delete" : ui.action.action === "rsvp" ? `RSVP ${ui.action.status}` : ""}
+          onSelect={handlePickEvent}
+          onCancel={reset}
+        />
+      )}
+
+      {ui.step === "executing" && (
+        <p style={{ color: "var(--text-tertiary)" }}>Executing...</p>
+      )}
+
+      <RecentActions actions={actions} />
     </div>
   );
 }

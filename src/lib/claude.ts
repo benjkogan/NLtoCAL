@@ -24,11 +24,13 @@ Rules:
 - Return ONLY the JSON object, no other text.`;
 
 export async function parseNaturalLanguage(
-  text: string
+  text: string,
+  clientTime?: { timezone?: string; localTime?: string; isoTime?: string }
 ): Promise<CalendarAction> {
   const now = new Date();
-  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const localTime = now.toLocaleString("en-US", { timeZone: timezone, dateStyle: "full", timeStyle: "long" });
+  const timezone = clientTime?.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const localTime = clientTime?.localTime || now.toLocaleString("en-US", { timeZone: timezone, dateStyle: "full", timeStyle: "long" });
+  const isoTime = clientTime?.isoTime || now.toISOString();
 
   const message = await client.messages.create({
     model: "claude-haiku-4-5-20251001",
@@ -37,7 +39,7 @@ export async function parseNaturalLanguage(
     messages: [
       {
         role: "user",
-        content: `Current date/time: ${localTime}\nTimezone: ${timezone}\nISO: ${now.toISOString()}\n\nUser input: ${text}`,
+        content: `Current date/time: ${localTime}\nTimezone: ${timezone}\nISO: ${isoTime}\n\nUser input: ${text}`,
       },
     ],
   });

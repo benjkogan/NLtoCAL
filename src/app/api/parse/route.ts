@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { text } = await request.json();
+  const { text, timezone, localTime, isoTime } = await request.json();
   if (!text || typeof text !== "string") {
     return NextResponse.json(
       { error: "Missing or invalid 'text' field" },
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const parsed = await parseNaturalLanguage(text);
+    const parsed = await parseNaturalLanguage(text, { timezone, localTime, isoTime });
     return NextResponse.json(parsed);
   } catch (error) {
     console.error("Parse error:", error);
