@@ -97,6 +97,7 @@ export default function Home() {
           description: action.description,
           location: action.location,
           recurrence: action.recurrence,
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         }),
       });
       const data = await res.json();
@@ -156,16 +157,18 @@ export default function Home() {
   }
 
   function addResult(type: "create" | "delete" | "rsvp", summary: string, success: boolean) {
-    setActions((prev) => [
-      {
-        id: crypto.randomUUID(),
-        type,
-        summary,
-        success,
-        timestamp: new Date(),
-      },
-      ...prev,
-    ]);
+    setActions((prev) =>
+      [
+        {
+          id: crypto.randomUUID(),
+          type,
+          summary,
+          success,
+          timestamp: new Date(),
+        },
+        ...prev,
+      ].slice(0, 10)
+    );
   }
 
   return (

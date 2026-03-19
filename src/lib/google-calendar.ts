@@ -15,17 +15,21 @@ export async function createEvent(
     description?: string;
     location?: string;
     recurrence?: string;
+    timeZone?: string;
   }
 ) {
   const calendar = getCalendarClient(accessToken);
+
+  const tz = eventData.timeZone || "UTC";
+
   const response = await calendar.events.insert({
     calendarId: "primary",
     requestBody: {
       summary: eventData.title,
       description: eventData.description,
       location: eventData.location,
-      start: { dateTime: eventData.startTime },
-      end: { dateTime: eventData.endTime },
+      start: { dateTime: eventData.startTime, timeZone: tz },
+      end: { dateTime: eventData.endTime, timeZone: tz },
       ...(eventData.recurrence ? { recurrence: [eventData.recurrence] } : {}),
     },
   });
