@@ -172,10 +172,10 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-1 flex-col items-center gap-8 pt-32 w-full max-w-2xl">
-      <div className="text-center mb-4">
+    <div className="flex flex-1 flex-col items-center gap-6 sm:gap-8 pt-16 sm:pt-32 w-full max-w-2xl">
+      <div className="text-center mb-2 sm:mb-4">
         <h2
-          className="text-3xl font-medium tracking-tight mb-2"
+          className="text-2xl sm:text-3xl font-medium tracking-tight mb-2"
           style={{ color: "var(--text-primary)" }}
         >
           What&apos;s on your calendar?

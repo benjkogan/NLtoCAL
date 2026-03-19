@@ -15,8 +15,8 @@ export default function AuthButton() {
 
   if (session) {
     return (
-      <div className="flex items-center gap-4">
-        <span className="text-sm" style={{ color: "var(--text-tertiary)" }}>
+      <div className="flex items-center gap-2 sm:gap-4">
+        <span className="hidden sm:inline text-sm" style={{ color: "var(--text-tertiary)" }}>
           {session.user?.email}
         </span>
         <button

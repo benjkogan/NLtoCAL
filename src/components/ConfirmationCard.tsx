@@ -118,7 +118,7 @@ export default function ConfirmationCard({
                   style={inputStyle}
                 />
               </div>
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <div className="flex-1">
                   <label className="mb-1.5 block text-xs" style={{ color: "var(--text-tertiary)" }}>
                     Start

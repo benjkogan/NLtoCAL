@@ -35,9 +35,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+      </head>
       <body className={`antialiased ${inter.className}`}>
         <SessionProvider>
-          <div className="flex min-h-screen flex-col items-center bg-pattern px-6">
+          <div className="flex min-h-screen flex-col items-center bg-pattern px-4 sm:px-6">
             <Header />
             {children}
           </div>
