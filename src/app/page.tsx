@@ -31,6 +31,17 @@ export default function Home() {
     }
   }, [session?.error]);
 
+  // After sign-in, auto-run any pending input the user typed before authenticating
+  useEffect(() => {
+    if (!session) return;
+    const pending = localStorage.getItem("pendingInput");
+    if (pending) {
+      localStorage.removeItem("pendingInput");
+      handleParse(pending);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session]);
+
   function transitionTo(newState: UIState) {
     setVisible(false);
     setTimeout(() => {
@@ -87,6 +98,7 @@ export default function Home() {
 
   async function handleParse(text: string) {
     if (!session) {
+      localStorage.setItem("pendingInput", text);
       signIn("google");
       return;
     }
