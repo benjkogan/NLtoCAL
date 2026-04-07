@@ -18,6 +18,7 @@ export async function POST(request: NextRequest) {
       description: body.description,
       location: body.location,
       recurrence: body.recurrence,
+      attendees: body.attendees,
       timeZone: body.timeZone,
     });
     return NextResponse.json({ success: true, event });
