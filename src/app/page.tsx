@@ -380,10 +380,10 @@ export default function Home() {
         )}
       </div>
 
-      {/* Flexible middle: action area with transitions */}
-      <div className="flex-1 w-full min-h-0 overflow-y-auto py-4 sm:py-6">
+      {/* Flexible middle: action area with transitions — never scrolls as a whole */}
+      <div className="flex-1 w-full min-h-0 py-4 sm:py-6">
         <div
-          className="transition-all duration-150 ease-in-out"
+          className="h-full transition-all duration-150 ease-in-out"
           style={{
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(8px)",
@@ -394,8 +394,8 @@ export default function Home() {
           )}
 
           {ui.step === "confirming" && (
-            <div className={showCalendarPreview ? "flex flex-col sm:flex-row gap-4" : ""}>
-              <div className={showCalendarPreview ? "flex-1 min-w-0" : "w-full"}>
+            <div className={showCalendarPreview ? "flex flex-col sm:flex-row gap-4 h-full min-h-0" : "h-full min-h-0 flex flex-col"}>
+              <div className={showCalendarPreview ? "flex-1 min-w-0 min-h-0 overflow-y-auto" : "w-full min-h-0 overflow-y-auto"}>
                 <ConfirmationCard
                   actions={ui.actions}
                   onConfirmCreate={handleConfirmCreate}
@@ -405,7 +405,7 @@ export default function Home() {
                 />
               </div>
               {showCalendarPreview && (
-                <div className="sm:w-48 shrink-0">
+                <div className="sm:w-48 shrink-0 min-h-0 overflow-y-auto">
                   <CalendarPreview
                     events={ui.dayEvents!}
                     highlightStart={ui.actions[0].startTime}
@@ -417,22 +417,26 @@ export default function Home() {
           )}
 
           {ui.step === "confirming-edit" && (
-            <ConfirmationCard
-              action={ui.action}
-              editEvent={ui.event}
-              onConfirmEdit={(changes) => handleConfirmEdit(changes)}
-              onCancel={reset}
-              isLoading={false}
-            />
+            <div className="h-full min-h-0 overflow-y-auto">
+              <ConfirmationCard
+                action={ui.action}
+                editEvent={ui.event}
+                onConfirmEdit={(changes) => handleConfirmEdit(changes)}
+                onCancel={reset}
+                isLoading={false}
+              />
+            </div>
           )}
 
           {ui.step === "picking" && (
-            <EventPicker
-              events={ui.events}
-              actionLabel={ui.action.action === "delete" ? "delete" : ui.action.action === "rsvp" ? `RSVP ${ui.action.status}` : ui.action.action === "edit" ? "edit" : ""}
-              onSelect={handlePickEvent}
-              onCancel={reset}
-            />
+            <div className="h-full min-h-0 overflow-y-auto">
+              <EventPicker
+                events={ui.events}
+                actionLabel={ui.action.action === "delete" ? "delete" : ui.action.action === "rsvp" ? `RSVP ${ui.action.status}` : ui.action.action === "edit" ? "edit" : ""}
+                onSelect={handlePickEvent}
+                onCancel={reset}
+              />
+            </div>
           )}
 
           {ui.step === "executing" && (
