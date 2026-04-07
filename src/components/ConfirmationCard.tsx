@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { CreateAction, EditAction } from "@/types/calendar";
 import { CalendarEvent } from "@/components/EventPicker";
-import BorderGlow from "@/components/BorderGlow";
 
 interface CreateConfirmProps {
   actions: CreateAction[];
@@ -273,18 +272,13 @@ function CreateConfirmCard({
   const count = actions.length;
 
   return (
-    <BorderGlow
-      className="w-full"
-      backgroundColor="var(--bg)"
-      borderRadius={12}
-      glowRadius={30}
-      glowIntensity={0.6}
-      glowColor="220 60 70"
-      colors={['#6366f1', '#8b5cf6', '#38bdf8']}
-      fillOpacity={0.3}
-      coneSpread={20}
+    <div
+      className="w-full rounded-lg p-6"
+      style={{
+        background: "var(--bg-raised)",
+        border: "1px solid var(--border)",
+      }}
     >
-      <div className="p-6">
       {conflicts && conflicts.length > 0 && (
         <div
           className="mb-4 rounded-lg px-4 py-3 text-sm"
@@ -357,8 +351,7 @@ function CreateConfirmCard({
           Nevermind
         </button>
       </div>
-      </div>
-    </BorderGlow>
+    </div>
   );
 }
 
@@ -378,18 +371,13 @@ function EditConfirmCard({
   }
 
   return (
-    <BorderGlow
-      className="w-full"
-      backgroundColor="var(--bg)"
-      borderRadius={12}
-      glowRadius={30}
-      glowIntensity={0.6}
-      glowColor="220 60 70"
-      colors={['#6366f1', '#8b5cf6', '#38bdf8']}
-      fillOpacity={0.3}
-      coneSpread={20}
+    <div
+      className="w-full rounded-lg p-6"
+      style={{
+        background: "var(--bg-raised)",
+        border: "1px solid var(--border)",
+      }}
     >
-      <div className="p-6">
       <div className="mb-4">
         <span
           className="text-xs font-medium uppercase tracking-widest"
@@ -497,7 +485,6 @@ function EditConfirmCard({
           Nevermind
         </button>
       </div>
-      </div>
-    </BorderGlow>
+    </div>
   );
 }

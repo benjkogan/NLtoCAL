@@ -69,7 +69,7 @@ export default function CalendarPreview({
         className="overflow-y-auto rounded-lg"
         style={{
           border: "1px solid var(--border)",
-          maxHeight: `${totalHeight + 8}px`,
+          maxHeight: "280px",
         }}
       >
         <div
