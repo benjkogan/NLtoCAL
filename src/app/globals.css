@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #14120b;
-  --bg-raised: rgba(237, 236, 236, 0.04);
-  --bg-hover: rgba(237, 236, 236, 0.06);
-  --border: rgba(237, 236, 236, 0.08);
-  --text-primary: #edecec;
-  --text-secondary: rgba(237, 236, 236, 0.7);
-  --text-tertiary: rgba(237, 236, 236, 0.5);
-  --accent: #edecec;
-  --accent-hover: rgba(237, 236, 236, 0.85);
-  --green: rgba(74, 222, 128, 0.8);
-  --red: rgba(248, 113, 113, 0.8);
-  --blue: rgba(96, 165, 250, 0.8);
+  --bg: #111113;
+  --bg-raised: rgba(255, 255, 255, 0.05);
+  --bg-hover: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.1);
+  --text-primary: #f0f0f3;
+  --text-secondary: rgba(240, 240, 243, 0.7);
+  --text-tertiary: rgba(240, 240, 243, 0.45);
+  --accent: #f0f0f3;
+  --accent-hover: rgba(240, 240, 243, 0.85);
+  --green: rgba(52, 211, 153, 0.85);
+  --red: rgba(251, 113, 133, 0.85);
+  --blue: rgba(99, 179, 237, 0.85);
 }
 
 body {
@@ -32,9 +32,9 @@ body {
 .bg-pattern {
   background-color: var(--bg);
   background-image:
-    radial-gradient(at 25% 15%, rgba(237, 236, 236, 0.02) 0px, transparent 50%),
-    radial-gradient(at 75% 85%, rgba(237, 236, 236, 0.015) 0px, transparent 50%),
-    linear-gradient(rgba(237, 236, 236, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(237, 236, 236, 0.03) 1px, transparent 1px);
+    radial-gradient(at 25% 15%, rgba(255, 255, 255, 0.02) 0px, transparent 50%),
+    radial-gradient(at 75% 85%, rgba(255, 255, 255, 0.015) 0px, transparent 50%),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 100%, 100%, 64px 64px, 64px 64px;
 }

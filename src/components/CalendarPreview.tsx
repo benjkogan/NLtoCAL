@@ -115,7 +115,7 @@ export default function CalendarPreview({
                 height: `${Math.max(getHeight(eStart, eEnd), 20)}px`,
                 left: "40px",
                 right: "8px",
-                background: "rgba(237, 236, 236, 0.06)",
+                background: "rgba(255, 255, 255, 0.06)",
                 border: "1px solid var(--border)",
                 color: "var(--text-secondary)",
               }}
@@ -136,7 +136,7 @@ export default function CalendarPreview({
             height: `${Math.max(getHeight(newStart, newEnd), 20)}px`,
             left: "52px",
             right: "8px",
-            background: "rgba(237, 236, 236, 0.12)",
+            background: "rgba(255, 255, 255, 0.1)",
             border: "1px solid var(--accent)",
             color: "var(--accent)",
           }}

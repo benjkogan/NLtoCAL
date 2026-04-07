@@ -300,7 +300,7 @@ function CreateConfirmCard({
         </div>
       )}
 
-      <div className={count > 1 ? "space-y-6 divide-y divide-[rgba(237,236,236,0.08)]" : ""}>
+      <div className={count > 1 ? "space-y-6 divide-y divide-[rgba(255,255,255,0.1)]" : ""}>
         {editedActions.map((edited, i) => (
           <div key={i} className={i > 0 ? "pt-6" : ""}>
             <CreateEventCard

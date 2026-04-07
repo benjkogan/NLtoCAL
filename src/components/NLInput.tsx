@@ -52,8 +52,8 @@ export default function NLInput({ onSubmit, isLoading }: NLInputProps) {
             color: "var(--text-primary)",
             transition: "height 0.15s ease, border-color 0.15s ease",
           }}
-          onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(237, 236, 236, 0.2)")}
-          onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(237, 236, 236, 0.08)")}
+          onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)")}
+          onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)")}
           disabled={isLoading}
         />
         <button
