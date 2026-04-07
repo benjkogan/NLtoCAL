@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 interface CalendarEvent {
   id: string;
   summary: string;
@@ -34,6 +36,8 @@ export default function EventPicker({
   onSelect,
   onCancel,
 }: EventPickerProps) {
+  const [selected, setSelected] = useState<CalendarEvent | null>(null);
+
   if (events.length === 0) {
     return (
       <div
@@ -60,6 +64,60 @@ export default function EventPicker({
     );
   }
 
+  if (selected) {
+    return (
+      <div
+        className="w-full rounded-lg p-6"
+        style={{
+          background: "var(--bg-raised)",
+          border: "1px solid var(--border)",
+        }}
+      >
+        <span
+          className="text-xs font-medium uppercase tracking-widest"
+          style={{ color: actionLabel.toLowerCase().includes("delete") ? "var(--red)" : "var(--blue)" }}
+        >
+          Confirm {actionLabel}
+        </span>
+        <h3
+          className="text-xl font-medium mt-3"
+          style={{ color: "var(--text-primary)" }}
+        >
+          {selected.summary || "(No title)"}
+        </h3>
+        <p className="mt-1.5" style={{ color: "var(--text-secondary)" }}>
+          {formatDateTime(selected.start)} &ndash; {formatDateTime(selected.end)}
+        </p>
+        <div className="mt-5 flex gap-3">
+          <button
+            onClick={() => onSelect(selected)}
+            className="rounded px-4 py-2 text-sm font-medium transition-all"
+            style={{
+              background: "var(--accent)",
+              color: "var(--bg)",
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.background = "var(--accent-hover)")}
+            onMouseOut={(e) => (e.currentTarget.style.background = "var(--accent)")}
+          >
+            Confirm &amp; {actionLabel.charAt(0).toUpperCase() + actionLabel.slice(1)}
+          </button>
+          <button
+            onClick={() => setSelected(null)}
+            className="rounded px-4 py-2 text-sm transition-colors"
+            style={{
+              color: "var(--text-secondary)",
+              border: "1px solid var(--border)",
+            }}
+            onMouseOver={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
+            onMouseOut={(e) => (e.currentTarget.style.background = "transparent")}
+          >
+            Back
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className="w-full rounded-lg p-6"
@@ -78,7 +136,7 @@ export default function EventPicker({
         {events.map((event) => (
           <button
             key={event.id}
-            onClick={() => onSelect(event)}
+            onClick={() => setSelected(event)}
             className="flex w-full items-center justify-between rounded-lg px-4 py-3 text-left transition-colors"
             style={{ border: "1px solid var(--border)" }}
             onMouseOver={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}

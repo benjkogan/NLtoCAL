@@ -13,10 +13,13 @@ export default function NLInput({ onSubmit, isLoading }: NLInputProps) {
 
   useEffect(() => {
     const el = textareaRef.current;
-    if (el) {
-      el.style.height = "0px";
-      el.style.height = `${Math.max(el.scrollHeight, 56)}px`;
+    if (!el) return;
+    if (!text) {
+      el.style.height = "56px";
+      return;
     }
+    el.style.height = "0px";
+    el.style.height = `${Math.max(el.scrollHeight, 56)}px`;
   }, [text]);
 
   const handleSubmit = (e: React.FormEvent) => {
