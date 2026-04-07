@@ -37,8 +37,8 @@ export default function CalendarPreview({
     if (end) allHours.push(getHour(end));
   });
 
-  const minHour = Math.max(0, Math.floor(Math.min(...allHours)) - 1);
-  const maxHour = Math.min(24, Math.ceil(Math.max(...allHours)) + 1);
+  const minHour = Math.floor(Math.min(...allHours));
+  const maxHour = Math.ceil(Math.max(...allHours));
   const totalHours = maxHour - minHour;
 
   if (totalHours <= 0) return null;
@@ -134,7 +134,7 @@ export default function CalendarPreview({
           style={{
             top: `${getTop(newStart)}px`,
             height: `${Math.max(getHeight(newStart, newEnd), 20)}px`,
-            left: "52px",
+            left: "40px",
             right: "8px",
             background: "rgba(255, 255, 255, 0.1)",
             border: "1px solid var(--accent)",
