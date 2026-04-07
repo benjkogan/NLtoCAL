@@ -13,7 +13,7 @@ interface SuggestedCommandsProps {
 
 export default function SuggestedCommands({ onSelect }: SuggestedCommandsProps) {
   return (
-    <div className="flex flex-wrap gap-2 w-full justify-center">
+    <div className="flex flex-wrap gap-2 w-full justify-center px-4 sm:px-0">
       {suggestions.map((s) => (
         <button
           key={s}

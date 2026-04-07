@@ -43,7 +43,7 @@ export default function CalendarPreview({
 
   if (totalHours <= 0) return null;
 
-  const hourHeight = 36; // px per hour
+  const hourHeight = 40; // px per hour
   const totalHeight = totalHours * hourHeight;
 
   function getTop(hour: number): number {
@@ -89,7 +89,7 @@ export default function CalendarPreview({
               style={{ top: `${getTop(hour)}px` }}
             >
               <span
-                className="text-[9px] w-9 text-right pr-1.5 -mt-1.5 shrink-0"
+                className="text-[11px] w-10 text-right pr-2 -mt-2 shrink-0"
                 style={{ color: "var(--text-tertiary)" }}
               >
                 {label}

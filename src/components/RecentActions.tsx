@@ -55,23 +55,15 @@ export default function RecentActions({ actions, onUndo }: RecentActionsProps) {
                   background: action.success ? "var(--green)" : "var(--red)",
                 }}
               />
-              <div>
-                <span
-                  className="text-xs font-medium uppercase tracking-wide"
-                  style={{ color: "var(--text-tertiary)" }}
-                >
-                  {action.type}
-                </span>
-                <p
-                  className="text-sm"
-                  style={{
-                    color: "var(--text-secondary)",
-                    textDecoration: action.undone ? "line-through" : "none",
-                  }}
-                >
-                  {action.summary}
-                </p>
-              </div>
+              <p
+                className="text-sm"
+                style={{
+                  color: action.success ? "var(--text-primary)" : "var(--red)",
+                  textDecoration: action.undone ? "line-through" : "none",
+                }}
+              >
+                {action.summary}
+              </p>
             </div>
             <div className="flex items-center gap-3">
               {action.id === undoableId && onUndo && (

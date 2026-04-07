@@ -283,12 +283,12 @@ function CreateConfirmCard({
         <div
           className="mb-4 rounded-lg px-4 py-3 text-sm"
           style={{
-            background: "rgba(251, 191, 36, 0.08)",
-            border: "1px solid rgba(251, 191, 36, 0.15)",
-            color: "rgba(251, 191, 36, 0.9)",
+            background: "rgba(251, 191, 36, 0.15)",
+            border: "1px solid rgba(251, 191, 36, 0.35)",
+            color: "rgba(251, 191, 36, 1.0)",
           }}
         >
-          <span className="font-medium">Heads up:</span> You have{" "}
+          <span className="font-semibold">Heads up:</span> You have{" "}
           {conflicts.map((c, i) => (
             <span key={c.id}>
               {i > 0 && ", "}
