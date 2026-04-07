@@ -20,13 +20,29 @@ body {
   color: var(--text-primary);
 }
 
-/* Hide scrollbar but keep scrollable */
-.overflow-y-auto {
+/* Hide scrollbar but keep scrollable — opt-in */
+.no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-.overflow-y-auto::-webkit-scrollbar {
+.no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* Thin scrollbar for small panels */
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+.thin-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
 }
 
 .bg-pattern {
