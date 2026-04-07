@@ -1,14 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { useSession, signIn } from "next-auth/react";
 import NLInput from "@/components/NLInput";
-import ConfirmationCard from "@/components/ConfirmationCard";
-import EventPicker, { CalendarEvent } from "@/components/EventPicker";
-import RecentActions, { ActionResult, UndoData } from "@/components/RecentActions";
+import type { CalendarEvent } from "@/components/EventPicker";
+import { ActionResult, UndoData } from "@/components/RecentActions";
 import SuggestedCommands from "@/components/SuggestedCommands";
-import CalendarPreview from "@/components/CalendarPreview";
 import { CalendarAction, CreateAction, EditAction } from "@/types/calendar";
+
+const ConfirmationCard = dynamic(() => import("@/components/ConfirmationCard"));
+const EventPicker = dynamic(() => import("@/components/EventPicker"));
+const CalendarPreview = dynamic(() => import("@/components/CalendarPreview"));
+const RecentActions = dynamic(() => import("@/components/RecentActions"));
 
 type UIState =
   | { step: "idle" }
@@ -406,8 +410,8 @@ export default function Home() {
           )}
 
           {ui.step === "confirming" && (
-            <div className={showCalendarPreview ? "flex flex-col sm:flex-row gap-4 h-full min-h-0" : "h-full min-h-0 flex flex-col"}>
-              <div className={showCalendarPreview ? "flex-1 min-w-0 min-h-0 overflow-y-auto" : "w-full min-h-0 overflow-y-auto"}>
+            <div className={showCalendarPreview ? "flex flex-col sm:flex-row sm:items-start gap-4" : ""}>
+              <div className={showCalendarPreview ? "flex-1 min-w-0" : "w-full"}>
                 <ConfirmationCard
                   actions={ui.actions}
                   onConfirmCreate={handleConfirmCreate}
@@ -417,7 +421,7 @@ export default function Home() {
                 />
               </div>
               {showCalendarPreview && (
-                <div className="max-h-48 sm:max-h-none sm:w-48 shrink-0 min-h-0 overflow-y-auto">
+                <div className="sm:w-52 shrink-0">
                   <CalendarPreview
                     events={ui.dayEvents!}
                     highlightStart={ui.actions[0].startTime}

@@ -58,14 +58,20 @@ export default function CalendarPreview({
   const timedEvents = events.filter((e) => e.start.dateTime && e.end.dateTime);
 
   return (
-    <div className="w-full h-full flex flex-col min-h-0">
+    <div className="w-full">
       <h3
-        className="mb-3 text-xs font-medium uppercase tracking-widest shrink-0"
+        className="mb-3 text-xs font-medium uppercase tracking-widest"
         style={{ color: "var(--text-tertiary)" }}
       >
         Your day
       </h3>
-      <div className="flex-1 min-h-0 overflow-y-auto rounded-lg" style={{ border: "1px solid var(--border)" }}>
+      <div
+        className="overflow-y-auto rounded-lg"
+        style={{
+          border: "1px solid var(--border)",
+          maxHeight: `${totalHeight + 8}px`,
+        }}
+      >
         <div
           className="relative"
           style={{
