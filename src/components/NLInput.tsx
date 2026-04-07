@@ -50,12 +50,16 @@ export default function NLInput({ onSubmit, isLoading }: NLInputProps) {
           placeholder='"2 hour lunch with Sarah Friday at noon" or "Cancel my 3pm meeting"'
           autoCapitalize="sentences"
           rows={1}
-          className="w-full resize-none rounded-lg px-4 py-3.5 pr-14 text-base overflow-hidden focus:outline-none"
+          className="w-full resize-none rounded-lg px-4 pr-14 text-base overflow-hidden focus:outline-none flex items-center"
           style={{
-            background: "var(--bg-raised)",
-            border: "1px solid var(--border)",
-            color: "var(--text-primary)",
-            transition: "height 0.15s ease, border-color 0.15s ease",
+            ...{
+              background: "var(--bg-raised)",
+              border: "1px solid var(--border)",
+              color: "var(--text-primary)",
+              transition: "height 0.15s ease, border-color 0.15s ease",
+              paddingTop: "16px",
+              paddingBottom: "16px",
+            },
           }}
           onFocus={(e) => (e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.2)")}
           onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)")}
