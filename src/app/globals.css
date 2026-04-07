@@ -20,6 +20,15 @@ body {
   color: var(--text-primary);
 }
 
+/* Hide scrollbar but keep scrollable */
+.overflow-y-auto {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.overflow-y-auto::-webkit-scrollbar {
+  display: none;
+}
+
 .bg-pattern {
   background-color: var(--bg);
   background-image:

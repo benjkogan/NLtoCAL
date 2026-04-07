@@ -28,19 +28,21 @@ export default function RecentActions({ actions, onUndo }: RecentActionsProps) {
     (a) => a.success && !a.undone && a.undoData
   )?.id;
 
+  const displayed = actions.slice(0, 3);
+
   return (
     <div className="w-full">
       <h2
-        className="mb-3 text-xs font-medium uppercase tracking-widest"
+        className="mb-2 text-xs font-medium uppercase tracking-widest"
         style={{ color: "var(--text-tertiary)" }}
       >
         Recent
       </h2>
-      <div className="space-y-1.5">
-        {actions.map((action) => (
+      <div className="space-y-1">
+        {displayed.map((action) => (
           <div
             key={action.id}
-            className="flex items-center justify-between rounded-lg px-4 py-3"
+            className="flex items-center justify-between rounded-lg px-3 py-2"
             style={{
               border: "1px solid var(--border)",
               opacity: action.undone ? 0.4 : 1,

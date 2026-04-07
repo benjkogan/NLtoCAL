@@ -23,6 +23,7 @@ export default function Home() {
   const [actions, setActions] = useState<ActionResult[]>([]);
   const [isParsing, setIsParsing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     if (session?.error === "RefreshTokenError") {
@@ -30,8 +31,16 @@ export default function Home() {
     }
   }, [session?.error]);
 
+  function transitionTo(newState: UIState) {
+    setVisible(false);
+    setTimeout(() => {
+      setUI(newState);
+      setVisible(true);
+    }, 150);
+  }
+
   function reset() {
-    setUI({ step: "idle" });
+    transitionTo({ step: "idle" });
   }
 
   async function fetchConflictsAndDayEvents(actions: CreateAction[]): Promise<{
@@ -44,13 +53,11 @@ export default function Home() {
       const earliest = new Date(Math.min(...starts));
       const latest = new Date(Math.max(...ends));
 
-      // Day boundaries in user's timezone
       const dayStart = new Date(earliest);
       dayStart.setHours(0, 0, 0, 0);
       const dayEnd = new Date(latest);
       dayEnd.setHours(23, 59, 59, 999);
 
-      // Fetch both in parallel: conflicts (exact overlap) and full day events
       const [conflictsRes, dayRes] = await Promise.all([
         fetch("/api/calendar/conflicts", {
           method: "POST",
@@ -103,17 +110,15 @@ export default function Home() {
       const rawParsed = await res.json();
       const parsedActions: CalendarAction[] = Array.isArray(rawParsed) ? rawParsed : [rawParsed];
 
-      // If all are create actions, go to confirming with the array
       if (parsedActions.every((a) => a.action === "create")) {
         const createActions = parsedActions as CreateAction[];
         const { conflicts, dayEvents } = await fetchConflictsAndDayEvents(createActions);
-        setUI({ step: "confirming", actions: createActions, conflicts, dayEvents });
+        transitionTo({ step: "confirming", actions: createActions, conflicts, dayEvents });
       } else {
-        // For non-create actions, handle the first one
         const parsed = parsedActions[0];
         if (parsed.action === "create") {
           const { conflicts, dayEvents } = await fetchConflictsAndDayEvents([parsed]);
-          setUI({ step: "confirming", actions: [parsed], conflicts, dayEvents });
+          transitionTo({ step: "confirming", actions: [parsed], conflicts, dayEvents });
         } else {
           const searchRes = await fetch("/api/calendar/search", {
             method: "POST",
@@ -128,7 +133,7 @@ export default function Home() {
             throw new Error("Failed to search events");
           }
           const { events } = await searchRes.json();
-          setUI({ step: "picking", action: parsed, events });
+          transitionTo({ step: "picking", action: parsed, events });
         }
       }
     } catch (err) {
@@ -226,7 +231,7 @@ export default function Home() {
         setError(err instanceof Error ? err.message : "Something went wrong");
       }
     } else if (action.action === "edit") {
-      setUI({ step: "confirming-edit", action, event });
+      transitionTo({ step: "confirming-edit", action, event });
       return;
     }
 
@@ -251,7 +256,6 @@ export default function Home() {
         }),
       });
       const data = await res.json();
-      // Build undo data from the event's current values for the changed fields
       const originalValues: Record<string, string> = {};
       if (changes.title !== undefined) originalValues.title = event.summary || "";
       if (changes.startTime !== undefined) originalValues.startTime = event.start.dateTime || event.start.date || "";
@@ -291,7 +295,6 @@ export default function Home() {
     try {
       const undo = action.undoData;
       if (undo.kind === "create") {
-        // Undo create = delete the event
         const res = await fetch("/api/calendar/delete", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -302,7 +305,6 @@ export default function Home() {
           throw new Error(data.error);
         }
       } else if (undo.kind === "delete") {
-        // Undo delete = re-create the event
         const res = await fetch("/api/calendar/create", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -320,7 +322,6 @@ export default function Home() {
           throw new Error(data.error);
         }
       } else if (undo.kind === "edit") {
-        // Undo edit = patch back original values
         const res = await fetch("/api/calendar/edit", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -336,7 +337,6 @@ export default function Home() {
         }
       }
 
-      // Mark the action as undone
       setActions((prev) =>
         prev.map((a) => (a.id === action.id ? { ...a, undone: true } : a))
       );
@@ -345,81 +345,108 @@ export default function Home() {
     }
   }
 
+  const showCalendarPreview =
+    ui.step === "confirming" && ui.dayEvents && ui.dayEvents.length > 0;
+
   return (
-    <div className="flex flex-1 flex-col items-center gap-6 sm:gap-8 pt-16 sm:pt-32 w-full max-w-2xl">
-      <div className="text-center mb-2 sm:mb-4">
-        <h2
-          className="text-2xl sm:text-3xl font-medium tracking-tight mb-2"
-          style={{ color: "var(--text-primary)" }}
-        >
-          What&apos;s on your calendar?
-        </h2>
-        <p style={{ color: "var(--text-secondary)" }}>
-          Create, edit, delete, or RSVP to events — just type naturally. We&apos;ll handle the rest.
-        </p>
+    <div className="flex flex-1 flex-col items-center w-full max-w-2xl min-h-0">
+      {/* Fixed top: title + input */}
+      <div className="w-full shrink-0 pt-8 sm:pt-16">
+        <div className="text-center mb-4 sm:mb-6">
+          <h2
+            className="text-2xl sm:text-3xl font-medium tracking-tight mb-2"
+            style={{ color: "var(--text-primary)" }}
+          >
+            What&apos;s on your calendar?
+          </h2>
+          <p style={{ color: "var(--text-secondary)" }}>
+            Create, edit, delete, or RSVP to events — just type naturally. We&apos;ll handle the rest.
+          </p>
+        </div>
+
+        <NLInput onSubmit={handleParse} isLoading={isParsing} />
+
+        {error && (
+          <div
+            className="w-full rounded-lg px-4 py-3 text-sm mt-4"
+            style={{
+              background: "rgba(248, 113, 113, 0.08)",
+              border: "1px solid rgba(248, 113, 113, 0.15)",
+              color: "var(--red)",
+            }}
+          >
+            {error}
+          </div>
+        )}
       </div>
 
-      <NLInput onSubmit={handleParse} isLoading={isParsing} />
-
-      {ui.step === "idle" && !isParsing && (
-        <SuggestedCommands onSelect={handleParse} />
-      )}
-
-      {error && (
+      {/* Flexible middle: action area with transitions */}
+      <div className="flex-1 w-full min-h-0 overflow-y-auto py-4 sm:py-6">
         <div
-          className="w-full rounded-lg px-4 py-3 text-sm"
+          className="transition-all duration-150 ease-in-out"
           style={{
-            background: "rgba(248, 113, 113, 0.08)",
-            border: "1px solid rgba(248, 113, 113, 0.15)",
-            color: "var(--red)",
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(8px)",
           }}
         >
-          {error}
+          {ui.step === "idle" && !isParsing && (
+            <SuggestedCommands onSelect={handleParse} />
+          )}
+
+          {ui.step === "confirming" && (
+            <div className={showCalendarPreview ? "flex flex-col sm:flex-row gap-4" : ""}>
+              <div className={showCalendarPreview ? "flex-1 min-w-0" : "w-full"}>
+                <ConfirmationCard
+                  actions={ui.actions}
+                  onConfirmCreate={handleConfirmCreate}
+                  onCancel={reset}
+                  isLoading={false}
+                  conflicts={ui.conflicts}
+                />
+              </div>
+              {showCalendarPreview && (
+                <div className="sm:w-48 shrink-0">
+                  <CalendarPreview
+                    events={ui.dayEvents!}
+                    highlightStart={ui.actions[0].startTime}
+                    highlightEnd={ui.actions[ui.actions.length - 1].endTime}
+                  />
+                </div>
+              )}
+            </div>
+          )}
+
+          {ui.step === "confirming-edit" && (
+            <ConfirmationCard
+              action={ui.action}
+              editEvent={ui.event}
+              onConfirmEdit={(changes) => handleConfirmEdit(changes)}
+              onCancel={reset}
+              isLoading={false}
+            />
+          )}
+
+          {ui.step === "picking" && (
+            <EventPicker
+              events={ui.events}
+              actionLabel={ui.action.action === "delete" ? "delete" : ui.action.action === "rsvp" ? `RSVP ${ui.action.status}` : ui.action.action === "edit" ? "edit" : ""}
+              onSelect={handlePickEvent}
+              onCancel={reset}
+            />
+          )}
+
+          {ui.step === "executing" && (
+            <p style={{ color: "var(--text-tertiary)" }}>Executing...</p>
+          )}
+        </div>
+      </div>
+
+      {/* Fixed bottom: recent actions */}
+      {actions.length > 0 && (
+        <div className="w-full shrink-0 pb-4 sm:pb-6">
+          <RecentActions actions={actions} onUndo={handleUndo} />
         </div>
       )}
-
-      {ui.step === "confirming" && (
-        <ConfirmationCard
-          actions={ui.actions}
-          onConfirmCreate={handleConfirmCreate}
-          onCancel={reset}
-          isLoading={false}
-          conflicts={ui.conflicts}
-        />
-      )}
-
-      {ui.step === "confirming" && ui.dayEvents && ui.dayEvents.length > 0 && (
-        <CalendarPreview
-          events={ui.dayEvents}
-          highlightStart={ui.actions[0].startTime}
-          highlightEnd={ui.actions[ui.actions.length - 1].endTime}
-        />
-      )}
-
-      {ui.step === "confirming-edit" && (
-        <ConfirmationCard
-          action={ui.action}
-          editEvent={ui.event}
-          onConfirmEdit={(changes) => handleConfirmEdit(changes)}
-          onCancel={reset}
-          isLoading={false}
-        />
-      )}
-
-      {ui.step === "picking" && (
-        <EventPicker
-          events={ui.events}
-          actionLabel={ui.action.action === "delete" ? "delete" : ui.action.action === "rsvp" ? `RSVP ${ui.action.status}` : ui.action.action === "edit" ? "edit" : ""}
-          onSelect={handlePickEvent}
-          onCancel={reset}
-        />
-      )}
-
-      {ui.step === "executing" && (
-        <p style={{ color: "var(--text-tertiary)" }}>Executing...</p>
-      )}
-
-      <RecentActions actions={actions} onUndo={handleUndo} />
     </div>
   );
 }
