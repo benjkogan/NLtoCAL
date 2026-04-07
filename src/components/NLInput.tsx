@@ -47,7 +47,7 @@ export default function NLInput({ onSubmit, isLoading }: NLInputProps) {
           placeholder='"2 hour lunch with Sarah Friday at noon" or "Cancel my 3pm meeting"'
           autoCapitalize="sentences"
           rows={1}
-          className="w-full resize-none rounded-lg px-4 py-3.5 pr-14 pb-12 text-base overflow-hidden focus:outline-none"
+          className="w-full resize-none rounded-lg px-4 py-3.5 pr-14 text-base overflow-hidden focus:outline-none"
           style={{
             background: "var(--bg-raised)",
             border: "1px solid var(--border)",
@@ -58,26 +58,35 @@ export default function NLInput({ onSubmit, isLoading }: NLInputProps) {
           onBlur={(e) => (e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)")}
           disabled={isLoading}
         />
-        <button
-          type="submit"
-          disabled={!canSubmit}
-          className="absolute bottom-2.5 right-2.5 h-8 w-8 rounded-md flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed"
-          style={{
-            background: canSubmit ? "var(--accent)" : "var(--bg-hover)",
-            color: "var(--bg)",
-          }}
-        >
-          {isLoading ? (
+        {isLoading ? (
+          <div
+            className="absolute top-1/2 -translate-y-1/2 right-2.5 h-8 rounded-md flex items-center gap-2 px-3 animate-pulse"
+            style={{
+              background: "var(--accent)",
+              color: "var(--bg)",
+            }}
+          >
             <span
-              className="h-4 w-4 rounded-full border-2 border-transparent animate-spin"
-              style={{ borderTopColor: "var(--bg)" }}
+              className="h-3.5 w-3.5 rounded-full border-2 border-transparent animate-spin"
+              style={{ borderTopColor: "var(--bg)", borderRightColor: "var(--bg)" }}
             />
-          ) : (
+            <span className="text-xs font-medium">Parsing</span>
+          </div>
+        ) : (
+          <button
+            type="submit"
+            disabled={!canSubmit}
+            className="absolute top-1/2 -translate-y-1/2 right-2.5 h-8 w-8 rounded-md flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+            style={{
+              background: canSubmit ? "var(--accent)" : "var(--bg-hover)",
+              color: "var(--bg)",
+            }}
+          >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 7H12M12 7L8 3M12 7L8 11" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          )}
-        </button>
+          </button>
+        )}
       </div>
     </form>
   );
