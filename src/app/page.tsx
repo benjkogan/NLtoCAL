@@ -410,7 +410,7 @@ export default function Home() {
           )}
 
           {ui.step === "confirming" && (
-            <div className={showCalendarPreview ? "flex flex-col sm:flex-row sm:items-start gap-4" : ""}>
+            <div className={showCalendarPreview ? "flex flex-col sm:flex-row gap-4" : ""}>
               <div className={showCalendarPreview ? "flex-1 min-w-0" : "w-full"}>
                 <ConfirmationCard
                   actions={ui.actions}
@@ -421,7 +421,7 @@ export default function Home() {
                 />
               </div>
               {showCalendarPreview && (
-                <div className="sm:w-52 shrink-0">
+                <div className="sm:w-52 shrink-0 min-h-0">
                   <CalendarPreview
                     events={ui.dayEvents!}
                     highlightStart={ui.actions[0].startTime}
