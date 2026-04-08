@@ -2,17 +2,17 @@
 
 :root {
   --bg: #111113;
-  --bg-raised: rgba(255, 255, 255, 0.05);
-  --bg-hover: rgba(255, 255, 255, 0.08);
-  --border: rgba(255, 255, 255, 0.1);
+  --bg-raised: rgba(255, 255, 255, 0.07);
+  --bg-hover: rgba(255, 255, 255, 0.11);
+  --border: rgba(255, 255, 255, 0.14);
   --text-primary: #f0f0f3;
-  --text-secondary: rgba(240, 240, 243, 0.7);
-  --text-tertiary: rgba(240, 240, 243, 0.45);
+  --text-secondary: rgba(240, 240, 243, 0.78);
+  --text-tertiary: rgba(240, 240, 243, 0.55);
   --accent: #f0f0f3;
-  --accent-hover: rgba(240, 240, 243, 0.85);
-  --green: rgba(52, 211, 153, 0.85);
-  --red: rgba(251, 113, 133, 0.85);
-  --blue: rgba(99, 179, 237, 0.85);
+  --accent-hover: rgba(240, 240, 243, 0.88);
+  --green: rgba(52, 211, 153, 0.95);
+  --red: rgba(251, 113, 133, 0.95);
+  --blue: rgba(99, 179, 237, 0.95);
 }
 
 body {
