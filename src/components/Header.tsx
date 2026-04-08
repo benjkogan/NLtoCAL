@@ -20,7 +20,7 @@ export default function Header() {
     <header className="flex w-full max-w-2xl flex-wrap items-center justify-between gap-y-3 py-6 sm:py-8">
       <Link
         href="/"
-        className="text-xl sm:text-2xl font-semibold tracking-wide transition-colors"
+        className="text-xl sm:text-2xl font-medium tracking-tight transition-colors"
         style={{ color: "var(--text-primary)" }}
         onMouseOver={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
         onMouseOut={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
