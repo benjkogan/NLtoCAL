@@ -2,7 +2,7 @@
 
 export default function Privacy() {
   return (
-    <div className="w-full max-w-2xl pt-4 sm:pt-8 pb-16 sm:pb-24">
+    <div className="w-full max-w-2xl flex-1 min-h-0 overflow-y-auto no-scrollbar pt-4 sm:pt-8 pb-16 sm:pb-24">
       <h1
         className="text-2xl sm:text-3xl font-medium tracking-tight mb-6"
         style={{ color: "var(--text-primary)" }}
