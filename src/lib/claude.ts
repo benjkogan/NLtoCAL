@@ -26,7 +26,8 @@ Rules:
 - When the user says "thru" or "through" a date for a recurring event, that date is inclusive — use UNTIL with that exact date.
 - When duration is specified (e.g. "for 1.5 hours", "for 90 minutes"), calculate endTime by adding the duration to startTime.
 - For recurring events on specific days (e.g. "Tue Thur"), the first occurrence should start on the next matching day, not today.
-- For delete and rsvp, include startDate/endDate to help narrow the search window.
+- For delete, edit, and rsvp, include startDate/endDate to help narrow the search window.
+- CRITICAL: The "query" field is used for Google Calendar text search, which requires ALL words to match. Use only the 1-2 most distinctive words likely to appear in the actual event title. Strip generic words the user says that probably aren't in the title. Examples: "cancel my gym session" → query: "gym", "delete the team standup" → query: "standup", "move my lunch with Sarah" → query: "lunch Sarah".
 - If the user specifies a recurring event (e.g. "every Monday", "weekly", "daily", "every weekday"), include a "recurrence" field with a valid RRULE string. Examples: "RRULE:FREQ=WEEKLY;BYDAY=MO", "RRULE:FREQ=DAILY", "RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR", "RRULE:FREQ=MONTHLY;BYDAY=1FR". If the user specifies an end date for the recurrence, add UNTIL (e.g. "RRULE:FREQ=WEEKLY;BYDAY=MO;UNTIL=20260401T000000Z"). If a count is specified, use COUNT (e.g. "RRULE:FREQ=WEEKLY;COUNT=10"). Do not include "recurrence" for one-time events.
 - For edit actions, only include the fields that are changing in "changes". Do not include unchanged fields.
 - If the user mentions people by email address (e.g. alice@example.com), include them in the "attendees" array. Only include valid email addresses, not names.
