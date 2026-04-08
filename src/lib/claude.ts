@@ -37,6 +37,7 @@ Rules:
   - "workshop", "training", "seminar" → 2 hours
   - "meeting" or anything else → 1 hour (default)
 - If the user describes multiple distinct events in one message (e.g. "lunch at noon and coffee at 3pm"), return a JSON array of action objects instead of a single object. Only return arrays when all actions are "create" actions.
+- Use proper title capitalization for event titles. Capitalize the first word and all major words. Always capitalize proper nouns (names, places, organizations), days of the week, etc. Examples: "lunch with Sarah" → "Lunch with Sarah", "team standup" → "Team Standup", "gym workout" → "Gym Workout", "meeting with john at starbucks" → "Meeting with John at Starbucks".
 - Return ONLY the JSON object (or array), no other text.`;
 
 export async function parseNaturalLanguage(
