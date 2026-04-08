@@ -397,9 +397,9 @@ export default function Home() {
       </div>
 
       {/* Flexible middle: action area with transitions — never scrolls as a whole */}
-      <div className="flex-1 w-full min-h-0 py-4 sm:py-6">
+      <div className="flex-1 w-full min-h-0 py-4 sm:py-6 flex flex-col">
         <div
-          className="h-full transition-all duration-150 ease-in-out"
+          className="flex-1 min-h-0 transition-all duration-150 ease-in-out"
           style={{
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(8px)",
@@ -410,8 +410,11 @@ export default function Home() {
           )}
 
           {ui.step === "confirming" && (
-            <div className={showCalendarPreview ? "flex flex-col sm:flex-row gap-4" : ""}>
-              <div className={showCalendarPreview ? "flex-1 min-w-0" : "w-full"}>
+            <div className={showCalendarPreview
+              ? "h-full flex flex-col sm:flex-row gap-4"
+              : "h-full overflow-y-auto no-scrollbar"
+            }>
+              <div className={showCalendarPreview ? "flex-1 min-w-0 overflow-y-auto no-scrollbar" : "w-full"}>
                 <ConfirmationCard
                   actions={ui.actions}
                   onConfirmCreate={handleConfirmCreate}
@@ -433,7 +436,7 @@ export default function Home() {
           )}
 
           {ui.step === "confirming-edit" && (
-            <div className="h-full min-h-0 overflow-y-auto">
+            <div className="h-full overflow-y-auto no-scrollbar">
               <ConfirmationCard
                 action={ui.action}
                 editEvent={ui.event}
@@ -445,7 +448,7 @@ export default function Home() {
           )}
 
           {ui.step === "picking" && (
-            <div className="h-full min-h-0 overflow-y-auto">
+            <div className="h-full overflow-y-auto no-scrollbar">
               <EventPicker
                 events={ui.events}
                 actionLabel={ui.action.action === "delete" ? "delete" : ui.action.action === "rsvp" ? `RSVP ${ui.action.status}` : ui.action.action === "edit" ? "edit" : ""}
