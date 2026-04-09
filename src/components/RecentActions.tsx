@@ -48,15 +48,15 @@ export default function RecentActions({ actions, onUndo }: RecentActionsProps) {
               opacity: action.undone ? 0.4 : 1,
             }}
           >
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 min-w-0">
               <span
-                className="inline-block h-1.5 w-1.5 rounded-full"
+                className="inline-block h-1.5 w-1.5 rounded-full shrink-0"
                 style={{
                   background: action.success ? "var(--green)" : "var(--red)",
                 }}
               />
               <p
-                className="text-sm"
+                className="text-sm truncate"
                 style={{
                   color: action.success ? "var(--text-primary)" : "var(--red)",
                   textDecoration: action.undone ? "line-through" : "none",
@@ -65,28 +65,16 @@ export default function RecentActions({ actions, onUndo }: RecentActionsProps) {
                 {action.summary}
               </p>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 shrink-0">
               {action.id === undoableId && onUndo && (
                 <button
                   onClick={() => onUndo(action)}
-                  className="text-xs font-medium transition-colors rounded px-2 py-1"
-                  style={{
-                    color: "var(--text-tertiary)",
-                    border: "1px solid var(--border)",
-                  }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.color = "var(--text-secondary)";
-                    e.currentTarget.style.background = "var(--bg-hover)";
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.color = "var(--text-tertiary)";
-                    e.currentTarget.style.background = "transparent";
-                  }}
+                  className="text-xs font-medium transition-colors rounded px-2.5 py-1.5 text-[var(--text-tertiary)] border border-[var(--border)] hover:text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] active:text-[var(--text-secondary)] active:bg-[var(--bg-hover)]"
                 >
                   Undo
                 </button>
               )}
-              <span className="text-xs" style={{ color: "var(--text-tertiary)" }}>
+              <span className="hidden sm:inline text-xs text-[var(--text-tertiary)]">
                 {action.timestamp.toLocaleTimeString()}
               </span>
             </div>

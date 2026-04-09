@@ -106,10 +106,7 @@ function CreateEventCard({
         {!editing && (
           <button
             onClick={onEdit}
-            className="text-xs transition-colors"
-            style={{ color: "var(--text-tertiary)" }}
-            onMouseOver={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
-            onMouseOut={(e) => (e.currentTarget.style.color = "var(--text-tertiary)")}
+            className="text-xs transition-colors py-2 text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] active:text-[var(--text-secondary)]"
           >
             Edit details
           </button>
@@ -204,10 +201,7 @@ function CreateEventCard({
           </div>
           <button
             onClick={onCancelEdit}
-            className="text-xs transition-colors"
-            style={{ color: "var(--text-tertiary)" }}
-            onMouseOver={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
-            onMouseOut={(e) => (e.currentTarget.style.color = "var(--text-tertiary)")}
+            className="text-xs transition-colors py-2 text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] active:text-[var(--text-secondary)]"
           >
             Done editing
           </button>
@@ -317,19 +311,11 @@ function CreateConfirmCard({
         ))}
       </div>
 
-      <div className="mt-5 flex gap-3">
+      <div className="mt-5 flex flex-col sm:flex-row gap-3">
         <button
           onClick={() => onConfirmCreate(editedActions)}
           disabled={isLoading}
-          className="rounded px-4 py-2 text-sm font-medium transition-all disabled:opacity-30"
-          style={{
-            background: "var(--accent)",
-            color: "var(--bg)",
-          }}
-          onMouseOver={(e) => {
-            if (!e.currentTarget.disabled) e.currentTarget.style.background = "var(--accent-hover)";
-          }}
-          onMouseOut={(e) => (e.currentTarget.style.background = "var(--accent)")}
+          className="rounded px-4 py-2 text-sm font-medium transition-all disabled:opacity-30 w-full sm:w-auto bg-[var(--accent)] text-[var(--bg)] enabled:hover:bg-[var(--accent-hover)] enabled:active:bg-[var(--accent-hover)]"
         >
           {isLoading
             ? "Adding..."
@@ -340,13 +326,7 @@ function CreateConfirmCard({
         <button
           onClick={onCancel}
           disabled={isLoading}
-          className="rounded px-4 py-2 text-sm transition-colors"
-          style={{
-            color: "var(--text-secondary)",
-            border: "1px solid var(--border)",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
-          onMouseOut={(e) => (e.currentTarget.style.background = "transparent")}
+          className="rounded px-4 py-2 text-sm transition-colors text-[var(--text-secondary)] border border-[var(--border)] hover:bg-[var(--bg-hover)] active:bg-[var(--bg-hover)]"
         >
           Nevermind
         </button>
@@ -455,32 +435,18 @@ function EditConfirmCard({
         )}
       </div>
 
-      <div className="mt-5 flex gap-3">
+      <div className="mt-5 flex flex-col sm:flex-row gap-3">
         <button
           onClick={() => onConfirmEdit(editedChanges)}
           disabled={isLoading}
-          className="rounded px-4 py-2 text-sm font-medium transition-all disabled:opacity-30"
-          style={{
-            background: "var(--accent)",
-            color: "var(--bg)",
-          }}
-          onMouseOver={(e) => {
-            if (!e.currentTarget.disabled) e.currentTarget.style.background = "var(--accent-hover)";
-          }}
-          onMouseOut={(e) => (e.currentTarget.style.background = "var(--accent)")}
+          className="rounded px-4 py-2 text-sm font-medium transition-all disabled:opacity-30 w-full sm:w-auto bg-[var(--accent)] text-[var(--bg)] enabled:hover:bg-[var(--accent-hover)] enabled:active:bg-[var(--accent-hover)]"
         >
           {isLoading ? "Updating..." : "Confirm & Update Event"}
         </button>
         <button
           onClick={onCancel}
           disabled={isLoading}
-          className="rounded px-4 py-2 text-sm transition-colors"
-          style={{
-            color: "var(--text-secondary)",
-            border: "1px solid var(--border)",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
-          onMouseOut={(e) => (e.currentTarget.style.background = "transparent")}
+          className="rounded px-4 py-2 text-sm transition-colors text-[var(--text-secondary)] border border-[var(--border)] hover:bg-[var(--bg-hover)] active:bg-[var(--bg-hover)]"
         >
           Nevermind
         </button>

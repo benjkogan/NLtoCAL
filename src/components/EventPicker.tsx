@@ -50,13 +50,7 @@ export default function EventPicker({
         <p style={{ color: "var(--text-secondary)" }}>No matching events found.</p>
         <button
           onClick={onCancel}
-          className="mt-4 rounded px-4 py-2 text-sm transition-colors"
-          style={{
-            color: "var(--text-secondary)",
-            border: "1px solid var(--border)",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
-          onMouseOut={(e) => (e.currentTarget.style.background = "transparent")}
+          className="mt-4 rounded px-4 py-2 text-sm transition-colors text-[var(--text-secondary)] border border-[var(--border)] hover:bg-[var(--bg-hover)] active:bg-[var(--bg-hover)]"
         >
           Back
         </button>
@@ -88,28 +82,16 @@ export default function EventPicker({
         <p className="mt-1.5" style={{ color: "var(--text-secondary)" }}>
           {formatDateTime(selected.start)} &ndash; {formatDateTime(selected.end)}
         </p>
-        <div className="mt-5 flex gap-3">
+        <div className="mt-5 flex flex-col sm:flex-row gap-3">
           <button
             onClick={() => onSelect(selected)}
-            className="rounded px-4 py-2 text-sm font-medium transition-all"
-            style={{
-              background: "var(--accent)",
-              color: "var(--bg)",
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.background = "var(--accent-hover)")}
-            onMouseOut={(e) => (e.currentTarget.style.background = "var(--accent)")}
+            className="rounded px-4 py-2 text-sm font-medium transition-all w-full sm:w-auto bg-[var(--accent)] text-[var(--bg)] hover:bg-[var(--accent-hover)] active:bg-[var(--accent-hover)]"
           >
             Confirm &amp; {actionLabel.charAt(0).toUpperCase() + actionLabel.slice(1)}
           </button>
           <button
             onClick={() => setSelected(null)}
-            className="rounded px-4 py-2 text-sm transition-colors"
-            style={{
-              color: "var(--text-secondary)",
-              border: "1px solid var(--border)",
-            }}
-            onMouseOver={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
-            onMouseOut={(e) => (e.currentTarget.style.background = "transparent")}
+            className="rounded px-4 py-2 text-sm transition-colors text-[var(--text-secondary)] border border-[var(--border)] hover:bg-[var(--bg-hover)] active:bg-[var(--bg-hover)]"
           >
             Back
           </button>
@@ -137,10 +119,7 @@ export default function EventPicker({
           <button
             key={event.id}
             onClick={() => setSelected(event)}
-            className="flex w-full items-center justify-between rounded-lg px-4 py-3 text-left transition-colors"
-            style={{ border: "1px solid var(--border)" }}
-            onMouseOver={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
-            onMouseOut={(e) => (e.currentTarget.style.background = "transparent")}
+            className="flex w-full items-center justify-between rounded-lg px-4 py-3 text-left transition-colors border border-[var(--border)] hover:bg-[var(--bg-hover)] active:bg-[var(--bg-hover)]"
           >
             <div>
               <p className="font-medium" style={{ color: "var(--text-primary)" }}>
@@ -161,13 +140,7 @@ export default function EventPicker({
       </div>
       <button
         onClick={onCancel}
-        className="mt-4 rounded px-4 py-2 text-sm transition-colors"
-        style={{
-          color: "var(--text-secondary)",
-          border: "1px solid var(--border)",
-        }}
-        onMouseOver={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
-        onMouseOut={(e) => (e.currentTarget.style.background = "transparent")}
+        className="mt-4 rounded px-4 py-2 text-sm transition-colors text-[var(--text-secondary)] border border-[var(--border)] hover:bg-[var(--bg-hover)] active:bg-[var(--bg-hover)]"
       >
         Nevermind
       </button>

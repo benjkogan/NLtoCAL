@@ -47,7 +47,7 @@ export default function NLInput({ onSubmit, isLoading }: NLInputProps) {
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder='"2 hour lunch with Sarah Friday at noon" or "Cancel my 3pm meeting"'
+          placeholder='e.g. "Lunch with Sarah Friday at noon"'
           autoCapitalize="sentences"
           rows={1}
           className="w-full resize-none rounded-lg px-4 pr-14 text-base overflow-hidden focus:outline-none flex items-center"

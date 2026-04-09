@@ -16,18 +16,12 @@ export default function AuthButton() {
   if (session) {
     return (
       <div className="flex items-center gap-2 sm:gap-4">
-        <span className="hidden sm:inline text-sm" style={{ color: "var(--text-tertiary)" }}>
+        <span className="hidden sm:inline text-sm text-[var(--text-tertiary)]">
           {session.user?.email}
         </span>
         <button
           onClick={() => signOut()}
-          className="rounded px-3 py-1.5 text-sm transition-colors"
-          style={{
-            color: "var(--text-secondary)",
-            border: "1px solid var(--border)",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
-          onMouseOut={(e) => (e.currentTarget.style.background = "transparent")}
+          className="rounded px-3 py-1.5 text-sm transition-colors text-[var(--text-secondary)] border border-[var(--border)] hover:bg-[var(--bg-hover)] active:bg-[var(--bg-hover)]"
         >
           Sign out
         </button>
@@ -38,13 +32,7 @@ export default function AuthButton() {
   return (
     <button
       onClick={() => signIn("google")}
-      className="flex items-center gap-2 rounded px-4 py-2 text-sm font-medium transition-colors"
-      style={{
-        color: "var(--text-primary)",
-        border: "1px solid var(--border)",
-      }}
-      onMouseOver={(e) => (e.currentTarget.style.background = "var(--bg-hover)")}
-      onMouseOut={(e) => (e.currentTarget.style.background = "transparent")}
+      className="flex items-center gap-2 rounded px-4 py-2 text-sm font-medium transition-colors text-[var(--text-primary)] border border-[var(--border)] hover:bg-[var(--bg-hover)] active:bg-[var(--bg-hover)]"
     >
       <svg width="16" height="16" viewBox="0 0 48 48">
         <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>

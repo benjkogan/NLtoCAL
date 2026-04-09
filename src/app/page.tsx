@@ -424,7 +424,7 @@ export default function Home() {
                 />
               </div>
               {showCalendarPreview && (
-                <div className="sm:w-52 shrink-0 min-h-0">
+                <div className="hidden sm:block sm:w-52 shrink-0 min-h-0">
                   <CalendarPreview
                     events={ui.dayEvents!}
                     highlightStart={ui.actions[0].startTime}

@@ -7,51 +7,37 @@ import AuthButton from "@/components/AuthButton";
 export default function Header() {
   const pathname = usePathname();
 
-  function navStyle(href: string) {
+  function navClass(href: string) {
     const isActive = pathname === href;
-    return {
-      color: isActive ? "var(--text-primary)" : "var(--text-tertiary)",
-      borderBottom: isActive ? "1px solid var(--text-secondary)" : "1px solid transparent",
-      paddingBottom: "2px",
-    };
+    return isActive
+      ? "text-[var(--text-primary)] border-b border-[var(--text-secondary)] pb-0.5"
+      : "text-[var(--text-tertiary)] hover:text-[var(--text-secondary)] active:text-[var(--text-secondary)] border-b border-transparent pb-0.5";
   }
 
   return (
-    <header className="flex w-full max-w-2xl flex-wrap items-center justify-between gap-y-3 py-6 sm:py-8">
+    <header className="flex w-full max-w-2xl flex-wrap items-center justify-between gap-y-3 py-4 sm:py-8">
       <Link
         href="/"
-        className="text-xl sm:text-2xl font-medium tracking-tight transition-colors"
-        style={{ color: "var(--text-primary)" }}
-        onMouseOver={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
-        onMouseOut={(e) => (e.currentTarget.style.color = "var(--text-primary)")}
+        className="text-xl sm:text-2xl font-medium tracking-tight transition-colors text-[var(--text-primary)] hover:text-[var(--text-secondary)] active:text-[var(--text-secondary)]"
       >
         NLtoCal
       </Link>
       <div className="flex items-center gap-3 sm:gap-4">
         <Link
           href="/"
-          className="text-sm sm:text-base transition-colors"
-          style={navStyle("/")}
-          onMouseOver={(e) => { if (pathname !== "/") e.currentTarget.style.color = "var(--text-secondary)"; }}
-          onMouseOut={(e) => { if (pathname !== "/") e.currentTarget.style.color = "var(--text-tertiary)"; }}
+          className={`text-sm sm:text-base transition-colors ${navClass("/")}`}
         >
           Home
         </Link>
         <Link
           href="/about"
-          className="text-sm sm:text-base transition-colors"
-          style={navStyle("/about")}
-          onMouseOver={(e) => { if (pathname !== "/about") e.currentTarget.style.color = "var(--text-secondary)"; }}
-          onMouseOut={(e) => { if (pathname !== "/about") e.currentTarget.style.color = "var(--text-tertiary)"; }}
+          className={`text-sm sm:text-base transition-colors ${navClass("/about")}`}
         >
           About
         </Link>
         <Link
           href="/privacy"
-          className="text-sm sm:text-base transition-colors hidden sm:inline"
-          style={navStyle("/privacy")}
-          onMouseOver={(e) => { if (pathname !== "/privacy") e.currentTarget.style.color = "var(--text-secondary)"; }}
-          onMouseOut={(e) => { if (pathname !== "/privacy") e.currentTarget.style.color = "var(--text-tertiary)"; }}
+          className={`text-sm sm:text-base transition-colors hidden sm:inline ${navClass("/privacy")}`}
         >
           Privacy
         </Link>

@@ -18,20 +18,7 @@ export default function SuggestedCommands({ onSelect }: SuggestedCommandsProps) 
         <button
           key={s}
           onClick={() => onSelect(s)}
-          className="rounded-full px-3.5 py-1.5 text-sm transition-colors"
-          style={{
-            background: "var(--bg-raised)",
-            border: "1px solid var(--border)",
-            color: "var(--text-tertiary)",
-          }}
-          onMouseOver={(e) => {
-            e.currentTarget.style.background = "var(--bg-hover)";
-            e.currentTarget.style.color = "var(--text-secondary)";
-          }}
-          onMouseOut={(e) => {
-            e.currentTarget.style.background = "var(--bg-raised)";
-            e.currentTarget.style.color = "var(--text-tertiary)";
-          }}
+          className="rounded-full px-3.5 py-1.5 text-sm transition-colors bg-[var(--bg-raised)] border border-[var(--border)] text-[var(--text-tertiary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-secondary)] active:bg-[var(--bg-hover)] active:text-[var(--text-secondary)]"
         >
           {s}
         </button>
