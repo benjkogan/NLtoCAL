@@ -18,6 +18,7 @@
 body {
   background-color: var(--bg);
   color: var(--text-primary);
+  overflow-x: hidden;
 }
 
 /* Hide scrollbar but keep scrollable — opt-in */

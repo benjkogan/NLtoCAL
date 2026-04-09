@@ -412,9 +412,9 @@ export default function Home() {
           {ui.step === "confirming" && (
             <div className={showCalendarPreview
               ? "flex-1 min-h-0 flex flex-col sm:flex-row gap-4"
-              : "flex-1 min-h-0 overflow-y-auto no-scrollbar"
+              : "flex-1 min-h-0 overflow-y-auto overflow-x-hidden no-scrollbar"
             }>
-              <div className={showCalendarPreview ? "flex-1 min-w-0 overflow-y-auto no-scrollbar" : "w-full"}>
+              <div className={showCalendarPreview ? "flex-1 min-w-0 overflow-y-auto overflow-x-hidden no-scrollbar" : "w-full"}>
                 <ConfirmationCard
                   actions={ui.actions}
                   onConfirmCreate={handleConfirmCreate}
@@ -424,7 +424,7 @@ export default function Home() {
                 />
               </div>
               {showCalendarPreview && (
-                <div className="hidden sm:block sm:w-52 shrink-0 min-h-0">
+                <div className="hidden sm:flex sm:flex-col sm:w-52 shrink-0 min-h-0">
                   <CalendarPreview
                     events={ui.dayEvents!}
                     highlightStart={ui.actions[0].startTime}
@@ -436,7 +436,7 @@ export default function Home() {
           )}
 
           {ui.step === "confirming-edit" && (
-            <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar">
+            <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden no-scrollbar">
               <ConfirmationCard
                 action={ui.action}
                 editEvent={ui.event}
@@ -448,7 +448,7 @@ export default function Home() {
           )}
 
           {ui.step === "picking" && (
-            <div className="flex-1 min-h-0 overflow-y-auto no-scrollbar">
+            <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden no-scrollbar">
               <EventPicker
                 events={ui.events}
                 actionLabel={ui.action.action === "delete" ? "delete" : ui.action.action === "rsvp" ? `RSVP ${ui.action.status}` : ui.action.action === "edit" ? "edit" : ""}
