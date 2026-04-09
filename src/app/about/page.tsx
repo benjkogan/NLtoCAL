@@ -2,7 +2,7 @@
 
 export default function About() {
   return (
-    <div className="w-full max-w-2xl flex-1 min-h-0 overflow-y-auto no-scrollbar pt-6 sm:pt-8 pb-8 sm:pb-10">
+    <div className="w-full max-w-2xl flex-1 min-h-0 overflow-y-auto sm:overflow-y-visible no-scrollbar pt-6 sm:pt-8 pb-8 sm:pb-10">
       <h1
         className="text-2xl sm:text-3xl font-medium tracking-tight mb-4"
         style={{ color: "var(--text-primary)" }}
