@@ -37,7 +37,7 @@ export default function Header() {
         </Link>
         <Link
           href="/privacy"
-          className={`text-sm sm:text-base transition-colors hidden sm:inline ${navClass("/privacy")}`}
+          className={`text-sm sm:text-base transition-colors ${navClass("/privacy")}`}
         >
           Privacy
         </Link>
