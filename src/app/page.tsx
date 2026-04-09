@@ -373,7 +373,7 @@ export default function Home() {
             className="text-2xl sm:text-3xl font-medium tracking-tight mb-2"
             style={{ color: "var(--text-primary)" }}
           >
-            What&apos;s on your calendar?
+            What&apos;s on your calendar{session?.user?.name ? `, ${session.user.name.split(" ")[0]}` : ""}?
           </h2>
           <p style={{ color: "var(--text-secondary)" }}>
             Create, edit, delete, or RSVP to events — just type naturally. We&apos;ll handle the rest.

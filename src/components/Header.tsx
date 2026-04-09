@@ -20,7 +20,7 @@ export default function Header() {
         href="/"
         className="text-xl sm:text-2xl font-medium tracking-tight transition-colors text-[var(--text-primary)] hover:text-[var(--text-secondary)] active:text-[var(--text-secondary)]"
       >
-        NLtoCal
+        NL2Cal
       </Link>
       <div className="flex items-center gap-3 sm:gap-4">
         <Link

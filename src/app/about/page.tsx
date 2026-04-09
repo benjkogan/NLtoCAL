@@ -2,24 +2,24 @@
 
 export default function About() {
   return (
-    <div className="w-full max-w-2xl flex-1 min-h-0 overflow-y-auto no-scrollbar pt-8 sm:pt-16 pb-16 sm:pb-24">
+    <div className="w-full max-w-2xl flex-1 min-h-0 overflow-y-auto no-scrollbar pt-6 sm:pt-8 pb-8 sm:pb-10">
       <h1
-        className="text-2xl sm:text-3xl font-medium tracking-tight mb-6"
+        className="text-2xl sm:text-3xl font-medium tracking-tight mb-4"
         style={{ color: "var(--text-primary)" }}
       >
         About
       </h1>
 
-      <div className="space-y-8">
+      <div className="space-y-5">
         <section>
           <h2
-            className="text-sm font-medium uppercase tracking-widest mb-3"
+            className="text-sm font-medium uppercase tracking-widest mb-2"
             style={{ color: "var(--text-secondary)" }}
           >
             What it is
           </h2>
-          <p style={{ color: "var(--text-primary)" }}>
-            NLtoCAL lets you manage your Google Calendar using plain English.
+          <p className="text-sm" style={{ color: "var(--text-primary)" }}>
+            NL2Cal lets you manage your Google Calendar using plain English.
             Instead of clicking through forms, just type what you want —
             create events, cancel meetings, or change your RSVP status in
             seconds.
@@ -28,13 +28,13 @@ export default function About() {
 
         <section>
           <h2
-            className="text-sm font-medium uppercase tracking-widest mb-3"
+            className="text-sm font-medium uppercase tracking-widest mb-2"
             style={{ color: "var(--text-secondary)" }}
           >
             How it works
           </h2>
           <ol
-            className="space-y-4 list-decimal list-inside"
+            className="space-y-2 list-decimal list-inside text-sm"
             style={{ color: "var(--text-primary)" }}
           >
             <li>
@@ -71,12 +71,12 @@ export default function About() {
 
         <section>
           <h2
-            className="text-sm font-medium uppercase tracking-widest mb-3"
+            className="text-sm font-medium uppercase tracking-widest mb-2"
             style={{ color: "var(--text-secondary)" }}
           >
             Examples
           </h2>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             {[
               "2 hour lunch with Sarah next Friday at noon",
               "Cancel my 3pm meeting tomorrow",
@@ -86,7 +86,7 @@ export default function About() {
             ].map((example) => (
               <div
                 key={example}
-                className="rounded-lg px-4 py-3"
+                className="rounded-lg px-3 py-2 text-sm"
                 style={{
                   background: "var(--bg-raised)",
                   border: "1px solid var(--border)",
@@ -101,29 +101,29 @@ export default function About() {
 
         <section>
           <h2
-            className="text-sm font-medium uppercase tracking-widest mb-3"
+            className="text-sm font-medium uppercase tracking-widest mb-2"
             style={{ color: "var(--text-secondary)" }}
           >
             Why it exists
           </h2>
-          <p style={{ color: "var(--text-primary)" }}>
+          <p className="text-sm" style={{ color: "var(--text-primary)" }}>
             Adding a calendar event should be as fast as telling someone about
             it. But Google Calendar&apos;s UI makes you click through date pickers,
             time selectors, and form fields for something you could say in one
-            sentence. NLtoCAL closes that gap — you describe what&apos;s happening,
+            sentence. NL2Cal closes that gap — you describe what&apos;s happening,
             and it just works.
           </p>
         </section>
 
         <section>
           <h2
-            className="text-sm font-medium uppercase tracking-widest mb-3"
+            className="text-sm font-medium uppercase tracking-widest mb-2"
             style={{ color: "var(--text-secondary)" }}
           >
             Privacy
           </h2>
-          <p style={{ color: "var(--text-primary)" }}>
-            NLtoCAL only accesses your Google Calendar when you explicitly
+          <p className="text-sm" style={{ color: "var(--text-primary)" }}>
+            NL2Cal only accesses your Google Calendar when you explicitly
             confirm an action. Your input text is sent to Claude for parsing
             but is not stored. Calendar tokens are kept in your session and
             never saved to a database.
