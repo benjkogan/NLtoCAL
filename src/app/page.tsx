@@ -120,9 +120,15 @@ export default function Home() {
             const now = new Date();
             const offset = -now.getTimezoneOffset();
             const sign = offset >= 0 ? "+" : "-";
-            const pad = (n: number) => String(Math.floor(Math.abs(n))).padStart(2, "0");
-            const offsetStr = `${sign}${pad(offset / 60)}:${pad(offset % 60)}`;
-            return now.toISOString().slice(0, 19) + offsetStr;
+            const pad = (n: number) => String(Math.abs(n)).padStart(2, "0");
+            const offsetStr = `${sign}${pad(Math.floor(Math.abs(offset) / 60))}:${pad(Math.abs(offset) % 60)}`;
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, "0");
+            const dd = String(now.getDate()).padStart(2, "0");
+            const hh = String(now.getHours()).padStart(2, "0");
+            const min = String(now.getMinutes()).padStart(2, "0");
+            const ss = String(now.getSeconds()).padStart(2, "0");
+            return `${yyyy}-${mm}-${dd}T${hh}:${min}:${ss}${offsetStr}`;
           })(),
         }),
       });
