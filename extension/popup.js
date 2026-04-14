@@ -1,4 +1,4 @@
-const API_BASE = "https://nltocal.vercel.app";
+const API_BASE = "https://nl2cal.vercel.app";
 
 const input = document.getElementById("input");
 const submitBtn = document.getElementById("submit");
@@ -31,7 +31,25 @@ async function handleSubmit() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({
+        text,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        localTime: new Date().toLocaleString("en-US", { dateStyle: "full", timeStyle: "long" }),
+        isoTime: (() => {
+          const now = new Date();
+          const offset = -now.getTimezoneOffset();
+          const sign = offset >= 0 ? "+" : "-";
+          const pad = (n) => String(Math.abs(n)).padStart(2, "0");
+          const offsetStr = `${sign}${pad(Math.floor(Math.abs(offset) / 60))}:${pad(Math.abs(offset) % 60)}`;
+          const yyyy = now.getFullYear();
+          const mm = String(now.getMonth() + 1).padStart(2, "0");
+          const dd = String(now.getDate()).padStart(2, "0");
+          const hh = String(now.getHours()).padStart(2, "0");
+          const min = String(now.getMinutes()).padStart(2, "0");
+          const ss = String(now.getSeconds()).padStart(2, "0");
+          return `${yyyy}-${mm}-${dd}T${hh}:${min}:${ss}${offsetStr}`;
+        })(),
+      }),
     });
 
     if (parseRes.status === 401) {
