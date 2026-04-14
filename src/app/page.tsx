@@ -116,7 +116,14 @@ export default function Home() {
           text,
           timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
           localTime: new Date().toLocaleString("en-US", { dateStyle: "full", timeStyle: "long" }),
-          isoTime: new Date().toISOString(),
+          isoTime: (() => {
+            const now = new Date();
+            const offset = -now.getTimezoneOffset();
+            const sign = offset >= 0 ? "+" : "-";
+            const pad = (n: number) => String(Math.floor(Math.abs(n))).padStart(2, "0");
+            const offsetStr = `${sign}${pad(offset / 60)}:${pad(offset % 60)}`;
+            return now.toISOString().slice(0, 19) + offsetStr;
+          })(),
         }),
       });
       if (!res.ok) {
